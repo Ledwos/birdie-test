@@ -11,7 +11,7 @@ import SubTitle from '@App/components/SubTitle';
 const LogoUrl = require('../../assets/images/logo-birdie.svg');
 
 interface AppProps {
-
+  tests: object;
 }
 
 interface AppState {
@@ -50,13 +50,16 @@ class App extends React.Component<AppProps, AppState> {
           <Logo src={LogoUrl} />
           <Title>Welcome to the birdie test</Title>
           <SubTitle>Best of luck!</SubTitle>
+          <p>test- {}</p>
         </AppContainer>
       </>
     );
   }
 }
 
-const mapStateToProps = (state: RootState, ownProps: object) => {};
+const mapStateToProps = (state: RootState, ownProps: object) => {
+  return { tests: state.tests };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch<RootState>) => {};
 

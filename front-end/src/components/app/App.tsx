@@ -43,6 +43,8 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   public render() {
+    // let test = JSON.stringify(this.props.tests);
+    let t2 = this.props.tests;
     return (
       <>
         <GlobalStyle />
@@ -50,7 +52,7 @@ class App extends React.Component<AppProps, AppState> {
           <Logo src={LogoUrl} />
           <Title>Welcome to the birdie test</Title>
           <SubTitle>Best of luck!</SubTitle>
-          <p>test- {}</p>
+          <p>test- {t2}</p>
         </AppContainer>
       </>
     );

@@ -44,13 +44,26 @@ app.get('/cr_id', (_,res) => {
     if (data.length === 0) {
       res.status(404).send({'error': 'no data found'});
     } else {
-      // let unique_id = [...new Set(data)];
       let id_array: Array<String> = []
       for (let x = 0; x < data.length; x++) {
         id_array.push(data[x].care_recipient_id);
       }
       let unique_id = [... new Set(id_array)];
       res.json(unique_id);
+    }
+  })
+});
+
+app.get('/cr/:cr_id', (req,res) => {
+  let cr_id: string = req.params.cr_id;
+  db('events')
+  .select('payload')
+  .where({care_recipient_id: `${cr_id}`})
+  .then((data: any) => {
+    if (data.length === 0) {
+      res.status(404).send({'error': 'no data found'});
+    } else {
+      res.json(data.length);
     }
   })
 });

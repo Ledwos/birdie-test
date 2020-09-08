@@ -63,7 +63,11 @@ app.get('/cr/:cr_id', (req,res) => {
     if (data.length === 0) {
       res.status(404).send({'error': 'no data found'});
     } else {
-      res.json(data.length);
+      let payload_array: Array<string> = [];
+      for (let x = 0; x < data.length; x++) {
+        payload_array.push(JSON.parse(data[x].payload));
+      }
+      res.json(payload_array.slice(0,10));
     }
   })
 });

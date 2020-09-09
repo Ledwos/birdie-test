@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { AppThunk, AppDispatch } from '../store';
+// import { AppThunk, AppDispatch } from '../store';
 // import { Test } from './types';
 import { RootState } from './rootReducer';
 

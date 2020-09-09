@@ -5,6 +5,9 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 const port = process.env.PORT || 5000;
+const cors = require('cors');
+
+app.use(cors());
 
 const db = require('knex')(({
   client: 'mysql',
@@ -26,18 +29,19 @@ app.get('/test', (_,res) => {
   //   'caregiver_id',
   //   'care_recipient_id'
   //   )
-  .select('care_recipient_id')
-  // .limit('3')
+  .select('*')
+  .limit('10')
   .then((data: any) => {
     if (data.length === 0) {
       res.status(404).send({'error': 'no data found'});
     } else {
-      res.json(data.slice(300,-1));
+      res.json(data);
     }
   })
 });
 
 app.get('/cr_id', (_,res) => {
+  console.log('id fetch called!');
   db('events')
   .select('care_recipient_id')
   .then((data: any) => {
@@ -47,9 +51,10 @@ app.get('/cr_id', (_,res) => {
       let id_array: Array<String> = []
       for (let x = 0; x < data.length; x++) {
         id_array.push(data[x].care_recipient_id);
-      }
+      };
       let unique_id = [... new Set(id_array)];
-      res.json(unique_id);
+      console.log(unique_id);
+      res.status(200).json(unique_id);
     }
   })
 });

@@ -41,7 +41,7 @@ app.get('/test', (_,res) => {
 });
 
 app.get('/cr_id', (_,res) => {
-  console.log('id fetch called!');
+  // console.log('id fetch called!');
   db('events')
   .select('care_recipient_id')
   .then((data: any) => {
@@ -53,7 +53,7 @@ app.get('/cr_id', (_,res) => {
         id_array.push(data[x].care_recipient_id);
       };
       let unique_id = [... new Set(id_array)];
-      console.log(unique_id);
+      // console.log(unique_id);
       res.status(200).json(unique_id);
     }
   })
@@ -61,6 +61,7 @@ app.get('/cr_id', (_,res) => {
 
 app.get('/cr/:cr_id', (req,res) => {
   let cr_id: string = req.params.cr_id;
+  console.log(`cr_id= ${cr_id}`);
   db('events')
   .select('payload')
   .where({care_recipient_id: `${cr_id}`})

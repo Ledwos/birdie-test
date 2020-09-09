@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import './App.css';
+import DisplayBox from './components/DisplayBox/DisplayBox';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { selectText } from './store/reducers/testSlice';
 import { 
   selectId, 
   getidArray,
-  setRecipient
+  setRecipient,
+  fetchData
 } from './store/reducers/crSlice';
 
 function App() {
@@ -20,14 +22,15 @@ function App() {
 
   const handleSelect = (e: any) => {
     let rc_id = e.target.value;
-    // console.log(rc_id)
     dispatch(setRecipient(rc_id));
+    dispatch(fetchData(rc_id));
   };
 
   return (
     <div className="App">
       <p>test string- {nuText}</p>
       {idArray ? <select  onChange={handleSelect}><option>Select Recipient</option>{idArray.map(id => <option value={id}>{id}</option> )}</select> : <p>No id's</p>}
+      <DisplayBox />
     </div>
   );
 }

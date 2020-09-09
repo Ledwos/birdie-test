@@ -1,17 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from './rootReducer';
-import { ReactComponent } from '*.svg';
 
 interface CrIdState {
     idArray: Array<string>,
     fetchError: boolean,
-    recipient: string
+    recipient: string,
+    recipientData: Array<string>
 };
 
 const initialState: CrIdState = {
     idArray: [],
     fetchError: false,
-    recipient: "N/A"
+    recipient: "N/A",
+    recipientData: [],
 };
 
 const crSlice = createSlice({
@@ -26,15 +27,18 @@ const crSlice = createSlice({
         },
         setRecipient: (state, action: PayloadAction<string>) => {
             state.recipient = action.payload;
+        },
+        setRecipientData: (state, action: PayloadAction<Array<string>>) => {
+            state.recipientData = action.payload;
         }
     }
 });
 
-export const { setidArray, updatefetchError, setRecipient } = crSlice.actions;
+export const { setidArray, updatefetchError, setRecipient, setRecipientData } = crSlice.actions;
 
 export const getidArray = () => async (dispatch: (arg0: { payload: Array<string> | boolean; type: string; }) => any) => {
     try {
-        fetch('http://localhost:5000/cr_id', {
+        fetch('/cr_id', {
             mode: 'cors',
             method: 'get',
         })
@@ -45,6 +49,24 @@ export const getidArray = () => async (dispatch: (arg0: { payload: Array<string>
           } else if (response.status === 404) {
               dispatch(updatefetchError(true))
           }
+        })
+    }
+    catch (err) {
+        console.log(err);
+    }
+}
+
+export const fetchData = (id: string) => (dispatch: (arg0: { payload: Array<string>; type: string; }) => any) => {
+    try {
+        fetch(`/cr/${id}`, {
+            mode: 'cors',
+            method: 'get'
+        })
+        .then(response => {
+            if (response.status === 200) {
+                response.json()
+                .then(data => dispatch(setRecipientData(data)))
+            }
         })
     }
     catch (err) {

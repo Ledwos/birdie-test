@@ -76,4 +76,6 @@ export const fetchData = (id: string) => (dispatch: (arg0: { payload: Array<stri
 
 export const selectId = (state: RootState) => state.careRecipient.idArray;
 
+export const selectRecipientData = (state: RootState) => state.careRecipient.recipientData;
+
 export default crSlice.reducer;

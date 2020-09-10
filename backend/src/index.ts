@@ -73,7 +73,7 @@ app.get('/cr/:cr_id', (req,res) => {
       for (let x = 0; x < data.length; x++) {
         payload_array.push(JSON.parse(data[x].payload));
       }
-      res.json(payload_array.slice(0,10));
+      res.json(payload_array);
     }
   })
 });

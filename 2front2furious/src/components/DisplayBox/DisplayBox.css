@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#displayMain {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.entryBox {
+    border: 3px solid #00254d;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 600px;
+    background-color: #54c5c1;
+    margin-top: 20px;
+}
+
+.entryHead {
+    background-color: white;
+    font-size: 18px;
+    color: #00254d;
+    display: flex;
+    justify-content: space-between;
+}
+
+.entryHeadEvent, .entryHeadTime {
+    margin: 10px
+}
+
+.entryHeadTime {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.entryBody {
+    height: 60px;
+    margin: 5px;
+    color: white;
+    display: flex;
+    align-items: flex-start;
+}

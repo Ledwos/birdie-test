@@ -29,13 +29,18 @@ app.get('/test', (_,res) => {
   //   'caregiver_id',
   //   'care_recipient_id'
   //   )
-  .select('*')
-  .limit('10')
+  .select('event_type')
+  // .limit('10')
   .then((data: any) => {
     if (data.length === 0) {
       res.status(404).send({'error': 'no data found'});
     } else {
-      res.json(data);
+      let event_array: Array<String> = []
+      for (let x = 0; x < data.length; x++) {
+        event_array.push(data[x].event_type);
+      };
+      let event_type = [... new Set(event_array)];
+      res.json(event_type);
     }
   })
 });
